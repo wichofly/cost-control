@@ -1,9 +1,11 @@
+import { BudgetForm } from './components/BudgetForm';
+import { Header } from './components/Header';
+
 const App = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline text-center text-orange-800">
-        Hello Wicho!
-      </h1>
+      <Header />
+      <BudgetForm />
     </div>
   );
 };
