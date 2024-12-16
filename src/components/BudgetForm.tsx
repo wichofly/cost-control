@@ -20,33 +20,31 @@ export const BudgetForm = () => {
   };
 
   return (
-    <section className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg mt-10 p-10">
-      <form className="space-y-5 text-center" onSubmit={handleSubmit}>
-        <div className="flex flex-col space-y-5">
-          <label
-            htmlFor="budget"
-            className="text-4xl text-sky-600 font-semibold "
-          >
-            Define Budget
-          </label>
-          <input
-            id="budget"
-            type="number"
-            name="budget"
-            placeholder="Define your budget"
-            value={budget}
-            onChange={handleChange}
-            className="w-full bg-white border border-gray-200 p-2 rounded-lg"
-          />
-        </div>
-
+    <form className="space-y-5 text-center" onSubmit={handleSubmit}>
+      <div className="flex flex-col space-y-5">
+        <label
+          htmlFor="budget"
+          className="text-4xl text-sky-600 font-semibold "
+        >
+          Define Budget
+        </label>
         <input
-          type="submit"
-          value="Define budget"
-          className="bg-sky-500 hover:bg-sky-600 w-full p-2 text-white font-semibold uppercase rounded-lg cursor-pointer disabled:opacity-40"
-          disabled={isValid}
+          id="budget"
+          type="number"
+          name="budget"
+          placeholder="Define your budget"
+          value={budget}
+          onChange={handleChange}
+          className="w-full bg-white border border-gray-200 p-2 rounded-lg"
         />
-      </form>
-    </section>
+      </div>
+
+      <input
+        type="submit"
+        value="Define budget"
+        className="bg-sky-500 hover:bg-sky-600 w-full p-2 text-white font-semibold uppercase rounded-lg cursor-pointer disabled:opacity-40"
+        disabled={isValid}
+      />
+    </form>
   );
 };
