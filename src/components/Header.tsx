@@ -7,7 +7,7 @@ export const Header = () => {
         <h1 className="uppercase font-bold text-4xl text-white">
           Expense planner
         </h1>
-        <a href="./">
+        <a href="/">
           <img
             src={expensePlannerImage}
             alt="Expense Planner"

@@ -1,8 +1,8 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react';
 import {
+  BudgetState,
   BudgetActions,
   budgetReducer,
-  BudgetState,
   initialState,
 } from '../reducers/budgetReducer';
 

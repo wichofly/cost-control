@@ -1,17 +1,16 @@
-import { useContext } from 'react';
 import { BudgetForm } from './components/BudgetForm';
 import { Header } from './components/Header';
-import { BudgetContext } from './context/BudgetContext';
+import { useBudget } from './hooks/useBudget';
 
 const App = () => {
-  const context = useContext(BudgetContext);
-  console.log(context);
-  
+  const { state, dispatch } = useBudget();
+  console.log(state);
+
   return (
-    <div>
+    <>
       <Header />
       <BudgetForm />
-    </div>
+    </>
   );
 };
 
