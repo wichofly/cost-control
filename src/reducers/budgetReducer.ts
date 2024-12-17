@@ -1,14 +1,15 @@
 export interface BudgetState {
   budget: number;
+  modal: boolean;
 }
 
-export interface BudgetActions {
-  type: 'add-budget';
-  payload: { budget: number };
-}
+export type BudgetActions =
+  | { type: 'add-budget'; payload: { budget: number } }
+  | { type: 'show-modal' };
 
 export const initialState: BudgetState = {
   budget: 0,
+  modal: false,
 };
 
 export const budgetReducer = (
@@ -21,5 +22,13 @@ export const budgetReducer = (
       budget: action.payload.budget,
     };
   }
+
+  if (action.type === 'show-modal') {
+    return {
+      ...state,
+      modal: true,
+    };
+  }
+
   return state;
 };
