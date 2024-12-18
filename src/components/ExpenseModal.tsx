@@ -12,8 +12,6 @@ import { ExpenseForm } from './ExpenseForm';
 export default function ExpenseModal() {
   const { state, dispatch } = useBudget();
 
-  // dispatch({ type: 'add-budget', payload: { budget } });
-
   return (
     <>
       <div className="fixed right-5 bottom-5 flex items-center justify-center">
