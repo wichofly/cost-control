@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { categories } from '../data/data';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import { DraftExpense } from '../interfaces/interface';
+import { DraftExpense, Value } from '../interfaces/interface';
 
 export const ExpenseForm = () => {
   const [expense, setExpense] = useState<DraftExpense>({
@@ -12,6 +12,25 @@ export const ExpenseForm = () => {
     category: '',
     date: new Date(),
   });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    const isAmountField = ['amount'].includes(name); // in amount is true, not in amount is false
+
+    setExpense({
+      ...expense,
+      [name]: isAmountField ? Number(value) : value, // Number(value) = +value
+    });
+  };
+
+  const handleChangeDate = (value: Value) => {
+    setExpense({
+      ...expense,
+      date: value,
+    });
+  };
 
   return (
     <form className="space-y-5">
@@ -30,6 +49,7 @@ export const ExpenseForm = () => {
           name="expenseName"
           className="bg-slate-100 rounded-md p-2"
           value={expense.expenseName}
+          onChange={handleChange}
         />
       </div>
 
@@ -44,6 +64,7 @@ export const ExpenseForm = () => {
           name="amount"
           className="bg-slate-100 rounded-md p-2"
           value={expense.amount}
+          onChange={handleChange}
         />
       </div>
 
@@ -56,6 +77,7 @@ export const ExpenseForm = () => {
           name="category"
           className="bg-slate-100 rounded-md p-2"
           value={expense.category}
+          onChange={handleChange}
         >
           <option value="">--- Select ---</option>
           {categories.map((category) => (
@@ -73,6 +95,7 @@ export const ExpenseForm = () => {
         <DatePicker
           value={expense.date}
           className="bg-slate-100 p-2 rounded-md border-0"
+          onChange={handleChangeDate}
         />
       </div>
 
