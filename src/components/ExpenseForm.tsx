@@ -1,6 +1,16 @@
 import { categories } from '../data/data';
+import { useState } from 'react';
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
+
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const ExpenseForm = () => {
+  const [value, onChange] = useState<Value>(new Date());
+
   return (
     <form className="space-y-5">
       <legend className="uppercase text-center text-2xl font-semibold border-b-2 border-blue-500 py-2">
@@ -49,6 +59,17 @@ export const ExpenseForm = () => {
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="dateExpended" className="text-xl">
+          Date Expended:
+        </label>
+        <DatePicker
+          onChange={onChange}
+          value={value}
+          className="bg-slate-100 p-2 rounded-md border-0"
+        />
       </div>
 
       <input
