@@ -19,7 +19,7 @@ export const initialState: BudgetState = {
   expenses: [],
 };
 
-// Create a new expense with a unique id. 
+// Create a new expense with a unique id.
 const createExpense = (draftExpense: DraftExpense): Expense => {
   return {
     ...draftExpense,
@@ -58,6 +58,7 @@ export const budgetReducer = (
     return {
       ...state,
       expenses: [...state.expenses, newExpense],
+      modal: false,
     };
   }
 

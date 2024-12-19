@@ -46,14 +46,6 @@ export const ExpenseForm = () => {
 
     // Dispatch the action to add the expense
     dispatch({ type: 'add-expense', payload: { expense } });
-
-    // Reset the form
-    setExpense({
-      expenseName: '',
-      amount: 0,
-      category: '',
-      date: new Date(),
-    });
   };
 
   return (
