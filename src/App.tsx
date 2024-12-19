@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { useBudget } from './hooks/useBudget';
 import { BudgetTracker } from './components/BudgetTracker';
 import ExpenseModal from './components/ExpenseModal';
+import { ExpenseList } from './components/ExpenseList';
 
 const App = () => {
   const { state } = useBudget();
@@ -20,6 +21,7 @@ const App = () => {
 
       {isValidBudget && (
         <div className="max-w-3xl mx-auto py-10">
+          <ExpenseList />
           <ExpenseModal />
         </div>
       )}
