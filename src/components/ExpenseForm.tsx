@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { categories } from '../data/data';
+import { useBudget } from '../hooks/useBudget';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
@@ -14,6 +15,7 @@ export const ExpenseForm = () => {
     date: new Date(),
   });
   const [error, setError] = useState('');
+  const { dispatch } = useBudget();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
@@ -41,6 +43,9 @@ export const ExpenseForm = () => {
       setError('All fields are required');
       return;
     }
+
+    // Dispatch the action to add the expense
+    dispatch({ type: 'add-expense', payload: { expense } });
   };
 
   return (
@@ -49,7 +54,7 @@ export const ExpenseForm = () => {
         New Expense
       </legend>
 
-      {error && <ErrorMessage>{error}</ErrorMessage>} 
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="expenseName" className="text-xl">
