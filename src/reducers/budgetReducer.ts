@@ -5,6 +5,7 @@ export interface BudgetState {
   budget: number;
   modal: boolean;
   expenses: Expense[];
+  editingId: Expense['id'];
 }
 
 export type BudgetActions =
@@ -12,12 +13,14 @@ export type BudgetActions =
   | { type: 'show-modal' }
   | { type: 'close-modal' }
   | { type: 'add-expense'; payload: { expense: DraftExpense } } // DraftExpense does not have an 'id'. id is generated in the reducer.
-  | { type: 'delete-expense'; payload: { id: Expense['id'] } };
+  | { type: 'delete-expense'; payload: { id: Expense['id'] } }
+  | { type: 'edit-expense'; payload: { id: Expense['id'] } };
 
 export const initialState: BudgetState = {
   budget: 0,
   modal: false,
   expenses: [],
+  editingId: '',
 };
 
 // Create a new expense with a unique id.
@@ -71,6 +74,15 @@ export const budgetReducer = (
     return {
       ...state,
       expenses: deletedExpense,
+    };
+  }
+
+  if (action.type === 'edit-expense') {
+    
+    return {
+      ...state,
+      editingId: action.payload.id,
+      modal: true,
     };
   }
 

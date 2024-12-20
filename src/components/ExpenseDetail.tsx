@@ -28,7 +28,11 @@ export const ExpenseDetail = ({ expense }: ExpenseDetailProps) => {
 
   const leadingActions = () => (
     <LeadingActions>
-      <SwipeAction onClick={() => console.info('swipe action triggered')}>
+      <SwipeAction
+        onClick={() =>
+          dispatch({ type: 'edit-expense', payload: { id: expense.id } })
+        }
+      >
         Update
       </SwipeAction>
     </LeadingActions>
