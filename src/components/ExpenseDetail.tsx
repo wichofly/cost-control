@@ -11,12 +11,15 @@ import { formatDate } from '../helper';
 import { Expense } from '../interfaces/interface';
 import { AmountDisplay } from './AmountDisplay';
 import { categories } from '../data/data';
+import { useBudget } from '../hooks/useBudget';
 
 interface ExpenseDetailProps {
   expense: Expense;
 }
 
 export const ExpenseDetail = ({ expense }: ExpenseDetailProps) => {
+  const { dispatch } = useBudget();
+
   // Find and memoize the category that matches the expense's category ID
   const categoryInfo = useMemo(
     () => categories.filter((cat) => cat.id === expense.category)[0],
@@ -35,7 +38,9 @@ export const ExpenseDetail = ({ expense }: ExpenseDetailProps) => {
     <TrailingActions>
       <SwipeAction
         destructive={true}
-        onClick={() => console.info('swipe action triggered')}
+        onClick={() =>
+          dispatch({ type: 'delete-expense', payload: { id: expense.id } })
+        }
       >
         Delete
       </SwipeAction>
