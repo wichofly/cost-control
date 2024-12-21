@@ -25,7 +25,7 @@ export const ExpenseForm = () => {
 
       setExpense(editingExpense);
     }
-  }, [state.editingId]);
+  }, [state.editingId, state.expenses]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
@@ -54,8 +54,15 @@ export const ExpenseForm = () => {
       return;
     }
 
-    // Dispatch the action to add the expense
-    dispatch({ type: 'add-expense', payload: { expense } });
+    // Dispatch the action to update or add an expense
+    if (state.editingId) {
+      dispatch({
+        type: 'update-expense',
+        payload: { expense: { id: state.editingId, ...expense } },
+      });
+    } else {
+      dispatch({ type: 'add-expense', payload: { expense } });
+    }
   };
 
   return (

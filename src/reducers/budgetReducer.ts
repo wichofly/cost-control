@@ -14,7 +14,8 @@ export type BudgetActions =
   | { type: 'close-modal' }
   | { type: 'add-expense'; payload: { expense: DraftExpense } } // DraftExpense does not have an 'id'. id is generated in the reducer.
   | { type: 'delete-expense'; payload: { id: Expense['id'] } }
-  | { type: 'edit-expense'; payload: { id: Expense['id'] } };
+  | { type: 'edit-expense'; payload: { id: Expense['id'] } }
+  | { type: 'update-expense'; payload: { expense: Expense } };
 
 export const initialState: BudgetState = {
   budget: 0,
@@ -53,6 +54,7 @@ export const budgetReducer = (
     return {
       ...state,
       modal: false,
+      editingId: '',
     };
   }
 
@@ -78,11 +80,25 @@ export const budgetReducer = (
   }
 
   if (action.type === 'edit-expense') {
-    
     return {
       ...state,
       editingId: action.payload.id,
       modal: true,
+    };
+  }
+
+  if (action.type === 'update-expense') {
+    const updatedExpenses = state.expenses.map((expense) =>
+      expense.id === action.payload.expense.id
+        ? action.payload.expense
+        : expense
+    );
+
+    return {
+      ...state,
+      expenses: updatedExpenses,
+      editingId: '',
+      modal: false,
     };
   }
 
