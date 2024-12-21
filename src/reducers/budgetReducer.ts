@@ -15,7 +15,8 @@ export type BudgetActions =
   | { type: 'add-expense'; payload: { expense: DraftExpense } } // DraftExpense does not have an 'id'. id is generated in the reducer.
   | { type: 'delete-expense'; payload: { id: Expense['id'] } }
   | { type: 'edit-expense'; payload: { id: Expense['id'] } }
-  | { type: 'update-expense'; payload: { expense: Expense } };
+  | { type: 'update-expense'; payload: { expense: Expense } }
+  | { type: 'reset' };
 
 const localStorageBudget = (): number => {
   const budget = localStorage.getItem('budget');
@@ -109,6 +110,14 @@ export const budgetReducer = (
       expenses: updatedExpenses,
       editingId: '',
       modal: false,
+    };
+  }
+
+  if (action.type === 'reset') {
+    return {
+      ...state,
+      budget: 0,
+      expenses: [],
     };
   }
 
