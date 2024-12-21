@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { categories } from '../data/data';
 import { useBudget } from '../hooks/useBudget';
 import DatePicker from 'react-date-picker';
@@ -15,7 +15,17 @@ export const ExpenseForm = () => {
     date: new Date(),
   });
   const [error, setError] = useState('');
-  const { dispatch } = useBudget();
+  const { state, dispatch } = useBudget();
+
+  useEffect(() => {
+    if (state.editingId) {
+      const editingExpense = state.expenses.filter(
+        (currentExpense) => currentExpense.id === state.editingId
+      )[0];
+
+      setExpense(editingExpense);
+    }
+  }, [state.editingId, state.expenses]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
@@ -44,14 +54,21 @@ export const ExpenseForm = () => {
       return;
     }
 
-    // Dispatch the action to add the expense
-    dispatch({ type: 'add-expense', payload: { expense } });
+    // Dispatch the action to update or add an expense
+    if (state.editingId) {
+      dispatch({
+        type: 'update-expense',
+        payload: { expense: { id: state.editingId, ...expense } },
+      });
+    } else {
+      dispatch({ type: 'add-expense', payload: { expense } });
+    }
   };
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <legend className="uppercase text-center text-2xl font-semibold border-b-2 border-blue-500 py-2">
-        New Expense
+        {state.editingId ? 'Save changes' : 'New Expense'}
       </legend>
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -120,7 +137,7 @@ export const ExpenseForm = () => {
       <input
         type="submit"
         className="bg-blue-600 cursor-pointer w-full p-2 text-white uppercase font-semibold rounded-md"
-        value="Register Expense"
+        value={state.editingId ? 'Save changes' : 'New Expense'}
       />
     </form>
   );
