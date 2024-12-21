@@ -15,7 +15,8 @@ export const ExpenseForm = () => {
     date: new Date(),
   });
   const [error, setError] = useState('');
-  const { state, dispatch } = useBudget();
+  const [previousAmount, setPreviousAmount] = useState(0);
+  const { state, dispatch, remainingBudget } = useBudget();
 
   useEffect(() => {
     if (state.editingId) {
@@ -24,6 +25,7 @@ export const ExpenseForm = () => {
       )[0];
 
       setExpense(editingExpense);
+      setPreviousAmount(editingExpense.amount);
     }
   }, [state.editingId, state.expenses]);
 
@@ -51,6 +53,12 @@ export const ExpenseForm = () => {
 
     if (Object.values(expense).includes('')) {
       setError('All fields are required');
+      return;
+    }
+
+    // Validate not to exceed the budget
+    if (expense.amount - previousAmount > remainingBudget) {
+      setError('This expense is outside the budget');
       return;
     }
 
