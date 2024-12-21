@@ -1,6 +1,17 @@
+import { useMemo } from 'react';
+import { useBudget } from '../hooks/useBudget';
 import { AmountDisplay } from './AmountDisplay';
 
 export const BudgetTracker = () => {
+  const { state } = useBudget();
+
+  const totalExpenses = useMemo(
+    () => state.expenses.reduce((total, expense) => expense.amount + total, 0),
+    [state.expenses]
+  );
+
+  const remainingBudget = state.budget - totalExpenses;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div className="flex justify-center">
@@ -14,9 +25,9 @@ export const BudgetTracker = () => {
         >
           Restart App
         </button>
-        <AmountDisplay label="Budget" amount={300} />
-        <AmountDisplay label="Available" amount={200} />
-        <AmountDisplay label="Spent" amount={100} />
+        <AmountDisplay label="Budget" amount={state.budget} />
+        <AmountDisplay label="Available" amount={remainingBudget} />
+        <AmountDisplay label="Spent" amount={totalExpenses} />
       </div>
     </div>
   );
