@@ -68,7 +68,7 @@ export const ExpenseForm = () => {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <legend className="uppercase text-center text-2xl font-semibold border-b-2 border-blue-500 py-2">
-        New Expense
+        {state.editingId ? 'Save changes' : 'New Expense'}
       </legend>
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -137,7 +137,7 @@ export const ExpenseForm = () => {
       <input
         type="submit"
         className="bg-blue-600 cursor-pointer w-full p-2 text-white uppercase font-semibold rounded-md"
-        value="Register Expense"
+        value={state.editingId ? 'Save changes' : 'New Expense'}
       />
     </form>
   );
