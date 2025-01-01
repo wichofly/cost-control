@@ -62,17 +62,20 @@ By using `Context` and `useReducer` together, the application achieves a clean a
 ## Useful npm Packages
 
 1. [React Swipeable List:](https://www.npmjs.com/package/react-swipeable-list)
-   **Description:** This package provides a swipeable list component for React. It allows users to swipe left or right on list items to reveal actions such as edit or delete.
-   **Usage:** Ideal for creating interactive lists where users can perform actions directly on list items through swipe gestures.
+
+   - **Description:** This package provides a swipeable list component for React. It allows users to swipe left or right on list items to reveal actions such as edit or delete.
+   - **Usage:** Ideal for creating interactive lists where users can perform actions directly on list items through swipe gestures.
 
 2. [React Date Picker:](https://www.npmjs.com/package/react-date-picker)
-   **Description:** A simple and customizable date picker component for React. It allows users to select dates from a calendar interface. It is necessary to install [react-calender](https://github.com/wojtekmaj/react-calendar) npm as well.
-   **Usage:** Useful for forms where users need to input dates, such as expense tracking or event planning applications.
+
+   - **Description:** A simple and customizable date picker component for React. It allows users to select dates from a calendar interface. It is necessary to install [react-calender](https://github.com/wojtekmaj/react-calendar) npm as well.
+   - **Usage:** Useful for forms where users need to input dates, such as expense tracking or event planning applications.
 
 3. [React Circular Progressbar:](https://www.npmjs.com/package/react-circular-progressbar)
-   **Description:** A circular progress bar component for React. It visually represents progress in a circular format.
-   **Usage:** Great for displaying progress or completion status, such as showing the percentage of budget used in an expense tracking application.
+
+   - **Description:** A circular progress bar component for React. It visually represents progress in a circular format.
+   - **Usage:** Great for displaying progress or completion status, such as showing the percentage of budget used in an expense tracking application.
 
 ## Deploy in Vercel
 
-[Cost Control]()
+[Cost Control](https://cost-control-red.vercel.app/)
