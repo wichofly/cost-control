@@ -49,6 +49,34 @@ The Cost Control Application is a React and TypeScript-based project designed to
    npm run dev
    ```
 
+## Project Structure
+
+```
+src/
+├── App.tsx
+├── components/
+│   ├── ExpenseForm.tsx
+│   ├── ExpenseList.tsx
+│   ├── ExpenseDetail.tsx
+│   ├── Header.tsx
+│   ├── BudgetForm.tsx
+│   ├── BudgetTracker.tsx
+│   ├── FilterByCategory.tsx
+│   └── ExpenseModal.tsx
+├── context/
+│   ├── BudgetContext.tsx
+│   └── BudgetProvider.tsx
+├── data/
+│   └── data.ts
+├── hooks/
+│   └── useBudget.ts
+├── interfaces/
+│   └── interface.ts
+├── reducers/
+│   └── budgetReducer.ts
+└── main.tsx
+```
+
 ## State Management
 
 This project uses `React Context`, `Custom Hooks`, and `useReducer` for state management. This combination provides several benefits:
