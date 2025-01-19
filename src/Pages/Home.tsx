@@ -9,7 +9,7 @@ export const Home = () => {
       <p className="mt-4 text-gray-600 text-xl font-semibold">
         Track your expenses and budget effectively.
       </p>
-      <div className="mt-8 space-x-4">
+      <div className="mt-8 space-x-4 flex flex-col gap-2 p-4 items-center md:flex-row md:justify-center">
         <Link
           to="/budget-tracker"
           className="bg-blue-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-700"

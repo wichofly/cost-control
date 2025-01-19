@@ -1,29 +1,52 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Bars3CenterLeftIcon } from '@heroicons/react/24/solid';
 import expensePlannerImage from '../assets/expense-planner.webp';
 
 export const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <header className="bg-sky-600 py-6 max-h-72">
-      <div className="flex items-center justify-between px-16">
-        <NavLink to="/" className="flex items-center">
+    <header className="bg-sky-600 py-6">
+      <div className="flex items-center justify-between px-6 lg:px-16">
+        <NavLink
+          to="/"
+          className="flex items-center"
+          onClick={() => setMenuOpen(false)}
+        >
           <img
             src={expensePlannerImage}
             alt="Expense Planner"
-            className="w-16 h-auto rounded-2xl shadow-lg"
+            className="w-12 h-auto rounded-xl shadow-lg lg:w-16"
           />
-          <h1 className="ml-2 uppercase font-bold text-3xl text-white">
-            Expense planner
+          <h1 className="ml-2 uppercase font-bold text-xl text-white lg:text-3xl">
+            Expense Planner
           </h1>
         </NavLink>
 
-        <nav className="flex space-x-4">
+        {!menuOpen && (
+          <button
+            className="lg:hidden text-white"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            arial-label="Toggle Navigation Menu"
+          >
+            <Bars3CenterLeftIcon className="h-8 w-8" />
+          </button>
+        )}
+
+        <nav
+          className={`${
+            menuOpen ? 'flex' : 'hidden'
+          } flex-col items-center space-y-4 mt-4 lg:flex lg:flex-row lg:space-y-0 lg:space-x-6`}
+        >
           <NavLink
             to="/"
             className={({ isActive }) =>
               isActive
-                ? 'text-white underline font-semibold text-2xl'
-                : 'text-gray-300 text-2xl font-semibold'
+                ? 'text-white underline font-semibold text-lg lg:text-2xl'
+                : 'text-gray-300 text-lg lg:text-2xl font-semibold'
             }
+            onClick={() => setMenuOpen(false)}
           >
             Home
           </NavLink>
@@ -31,9 +54,10 @@ export const Header = () => {
             to="/budget-tracker"
             className={({ isActive }) =>
               isActive
-                ? 'text-white underline font-semibold text-2xl'
-                : 'text-gray-300 text-2xl font-semibold'
+                ? 'text-white underline font-semibold text-lg lg:text-2xl'
+                : 'text-gray-300 text-lg lg:text-2xl font-semibold'
             }
+            onClick={() => setMenuOpen(false)}
           >
             Budget Tracker
           </NavLink>
@@ -41,9 +65,10 @@ export const Header = () => {
             to="/about"
             className={({ isActive }) =>
               isActive
-                ? 'text-white underline font-semibold text-2xl'
-                : 'text-gray-300 text-2xl font-semibold'
+                ? 'text-white underline font-semibold text-lg lg:text-2xl'
+                : 'text-gray-300 text-lg lg:text-2xl font-semibold'
             }
+            onClick={() => setMenuOpen(false)}
           >
             About
           </NavLink>
