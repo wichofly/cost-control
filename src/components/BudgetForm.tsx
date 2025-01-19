@@ -22,10 +22,7 @@ export const BudgetForm = () => {
   return (
     <form className="space-y-5 text-center" onSubmit={handleSubmit}>
       <div className="flex flex-col space-y-5">
-        <label
-          htmlFor="budget"
-          className="text-4xl text-sky-600 font-semibold "
-        >
+        <label htmlFor="budget" className="text-4xl text-sky-600 font-semibold">
           Define Budget
         </label>
         <input
